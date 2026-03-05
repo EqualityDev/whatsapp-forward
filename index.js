@@ -3,6 +3,7 @@ const { Client: WAClient, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const { Client: DCClient, GatewayIntentBits } = require('discord.js');
 const { handleWelcome } = require('./features/welcome');
+const { handleCommands } = require('./features/commands');
 
 const WA_GROUP_ID = process.env.WA_GROUP_ID;
 const FORWARD_CHANNEL_ID = process.env.FORWARD_CHANNEL_ID;
@@ -61,5 +62,6 @@ dc.on('messageCreate', async (message) => {
 });
 
 wa.on('group_join', (notification) => handleWelcome(wa, notification));
+wa.on('message', (message) => handleCommands(wa, message));
 
 dc.login(DISCORD_TOKEN);
