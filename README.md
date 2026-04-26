@@ -28,6 +28,11 @@ Bot WhatsApp untuk meneruskan pengumuman dari channel Discord ke grup WhatsApp C
     # PUPPETEER_EXECUTABLE_PATH=/data/data/com.termux/files/usr/bin/chromium-browser
     # PUPPETEER_ARGS=--no-sandbox,--disable-setuid-sandbox
 
+    # (Opsional) login tanpa QR (pairing code 8 karakter)
+    # WA_PAIRING_PHONE=62812xxxxxxxx
+    # WA_PAIRING_SHOW_NOTIFICATION=1
+    # WA_PAIRING_INTERVAL_MS=180000
+
     # (Opsional)
     # FORWARD_DISCORD_MESSAGE_LINK=1   # 0 untuk matikan link message Discord
     # MAX_TEXT_CHUNK_LEN=3500          # auto split jika pesan panjang

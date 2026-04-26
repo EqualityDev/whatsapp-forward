@@ -12,6 +12,15 @@ const config = loadConfig();
 // ─── WhatsApp Client ───────────────────────────────────────────
 const wa = new WAClient({
     authStrategy: new LocalAuth(),
+    ...(config.pairingPhoneNumber
+        ? {
+            pairWithPhoneNumber: {
+                phoneNumber: config.pairingPhoneNumber,
+                showNotification: config.pairingShowNotification,
+                intervalMs: config.pairingIntervalMs
+            }
+        }
+        : {}),
     puppeteer: {
         ...(config.puppeteerExecutablePath ? { executablePath: config.puppeteerExecutablePath } : {}),
         args: config.puppeteerArgs
@@ -19,8 +28,20 @@ const wa = new WAClient({
 });
 
 wa.on('qr', (qr) => {
+    if (config.pairingPhoneNumber) {
+        console.log('Pairing code mode aktif, QR di-skip.');
+        return;
+    }
     qrcode.generate(qr, { small: true });
     console.log('Scan QR code dengan WhatsApp!');
+});
+
+wa.on('code', (code) => {
+    console.log('');
+    console.log('=== WhatsApp Pairing Code ===');
+    console.log(code);
+    console.log('Buka WhatsApp di HP → Perangkat tertaut (Linked devices) → Tautkan perangkat → "Tautkan dengan nomor telepon", lalu masukkan kode di atas.');
+    console.log('');
 });
 
 wa.on('ready', () => {
