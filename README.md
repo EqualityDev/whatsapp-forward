@@ -20,6 +20,19 @@ Bot WhatsApp untuk meneruskan pengumuman dari channel Discord ke grup WhatsApp C
     WA_GROUP_ID=id_grup_whatsapp@g.us
     FORWARD_CHANNEL_ID=id_channel_discord_yang_di_forward
 
+    # (Opsional) bisa pakai list dipisah koma untuk multi target
+    # WA_GROUP_ID=id1@g.us,id2@g.us
+    # FORWARD_CHANNEL_ID=channel1,channel2
+
+    # (Opsional) untuk Termux / custom chromium
+    # PUPPETEER_EXECUTABLE_PATH=/data/data/com.termux/files/usr/bin/chromium-browser
+    # PUPPETEER_ARGS=--no-sandbox,--disable-setuid-sandbox
+
+    # (Opsional)
+    # FORWARD_DISCORD_MESSAGE_LINK=1   # 0 untuk matikan link message Discord
+    # MAX_TEXT_CHUNK_LEN=3500          # auto split jika pesan panjang
+    # ORDER_COMMAND=!order             # ubah command order
+
 ---
 
 ## Cara Install
@@ -28,8 +41,9 @@ Bot WhatsApp untuk meneruskan pengumuman dari channel Discord ke grup WhatsApp C
     cd whatsapp-forward
     npm install --ignore-scripts
     pkg install x11-repo -y && pkg install chromium -y
+    cp .env.example .env
     nano .env
-    node index.js
+    npm start
     # Scan QR dengan WhatsApp di nomor bot
     bash start.sh
 
@@ -47,3 +61,4 @@ Bot WhatsApp untuk meneruskan pengumuman dari channel Discord ke grup WhatsApp C
 - Nomor WhatsApp yang digunakan sebagai bot tidak bisa digunakan di HP lain bersamaan.
 - Jangan membagikan file .env ke siapapun.
 - Bot menggunakan whatsapp-web.js yang bukan API resmi WhatsApp, gunakan secara wajar.
+- Attachment Discord akan dicoba dikirim sebagai media ke WA; jika gagal akan fallback mengirim URL attachment.
