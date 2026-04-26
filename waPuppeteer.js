@@ -9,8 +9,10 @@ function parseList(value) {
 }
 
 function findDefaultChromiumPath() {
-  const termuxChromium = '/data/data/com.termux/files/usr/bin/chromium-browser';
+  const termuxChromiumBrowser = '/data/data/com.termux/files/usr/bin/chromium-browser';
+  const termuxChromium = '/data/data/com.termux/files/usr/bin/chromium';
   try {
+    if (fs.existsSync(termuxChromiumBrowser)) return termuxChromiumBrowser;
     if (fs.existsSync(termuxChromium)) return termuxChromium;
   } catch (_) {
     // ignore
@@ -31,4 +33,3 @@ function getWaPuppeteerOptions(env = process.env) {
 }
 
 module.exports = { getWaPuppeteerOptions, parseList };
-

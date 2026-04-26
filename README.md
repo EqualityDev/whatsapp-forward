@@ -25,6 +25,7 @@ Bot WhatsApp untuk meneruskan pengumuman dari channel Discord ke grup WhatsApp C
     # FORWARD_CHANNEL_ID=channel1,channel2
 
     # (Opsional) untuk Termux / custom chromium
+    # PUPPETEER_EXECUTABLE_PATH=/data/data/com.termux/files/usr/bin/chromium
     # PUPPETEER_EXECUTABLE_PATH=/data/data/com.termux/files/usr/bin/chromium-browser
     # PUPPETEER_ARGS=--no-sandbox,--disable-setuid-sandbox
 
